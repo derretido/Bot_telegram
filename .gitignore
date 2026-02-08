@@ -1,0 +1,39 @@
+# Arquivos de ambiente e credenciais
+.env
+*.env
+
+# Logs
+*.log
+logs/
+__pycache__/
+*.py[cod]
+
+# Arquivos temporários
+*.swp
+*.swo
+*.tmp
+*.bak
+
+# Configurações locais
+.vscode/
+.idea/
+*.iml
+
+# Arquivos de sistema
+.DS_Store
+Thumbs.db
+
+# Virtualenv
+venv/
+env/
+ENV/
+.venv/
+
+# Cache do Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Arquivos de testes
+.coverage
+.pytest_cache/
