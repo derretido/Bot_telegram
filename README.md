@@ -1,117 +1,56 @@
-# Bot_telegram
+# Telegram Promo Bot
 
+Um bot para Telegram que envia automaticamente links de promoções em horários pré-definidos (9h às 18h) e também responde manualmente ao comando `/promo`.  
+O projeto integra banco de dados MongoDB Atlas, agendamento de tarefas e envio de mensagens com botões interativos.
 
-Telegram Promo Bot
+---
 
-A Telegram bot built with Python that automatically sends affiliate promotion links at scheduled times, using MongoDB Atlas as a cloud database and a task scheduling system.
+## 🚀 Funcionalidades
+- Envio automático de promoções em horários configurados (job queue).
+- Comando `/promo` para listar todas as promoções disponíveis.
+- Mensagens com botões interativos que levam direto ao link da promoção.
+- Integração com banco de dados MongoDB Atlas para armazenar e atualizar os links.
+- Configuração de fuso horário para garantir que os envios ocorram no horário de Brasília.
 
-This project was created to solve a real problem: automate the daily manual work of sending affiliate links at strategic times, saving time and making the process fully automatic.
+---
 
-🚀 Features
+## 🛠️ Bibliotecas utilizadas
+- **[python-telegram-bot](https://python-telegram-bot.org/)**  
+  Biblioteca principal para criação do bot, envio de mensagens e botões inline.
 
-⏰ Automatic sending of promotions at scheduled times
+- **pymongo**  
+  Conexão com o banco de dados MongoDB Atlas, leitura e atualização dos links de promoções.
 
-🗄 Integration with MongoDB Atlas (cloud database)
+- **pytz**  
+  Manipulação de fusos horários, garantindo que os agendamentos sigam o horário de Brasília.
 
-📍 Timezone control (Brasília) using zoneinfo
+- **datetime**  
+  Definição dos horários de execução dos jobs (`datetime.time`).
 
-🔁 Daily message scheduling between 9 AM and 6 PM
+- **os / python-dotenv**  
+  Carregamento de variáveis de ambiente (TOKEN do bot e CHAT_ID do grupo), mantendo informações sensíveis fora do código.
 
-💬 Interactive Telegram commands:
+---
 
-/start
+## 📂 Estrutura do projeto
+- `bot.py` → código principal do bot (funções, handlers e agendamento).
+- `load_promotions()` → função que lê os links direto do MongoDB Atlas.
+- `promo()` → comando manual que lista todas as promoções.
+- `send_scheduled_message()` → função que envia automaticamente a promoção correspondente ao horário.
+- `.env` → arquivo com variáveis de ambiente (TOKEN e CHAT_ID).
 
-/help
+---
 
-/promo
+## ⚙️ Como funciona
+1. O bot conecta ao MongoDB Atlas e carrega os links de promoções.
+2. O `job_queue` agenda mensagens automáticas de acordo com os horários definidos.
+3. O comando `/promo` pode ser usado a qualquer momento para listar todas as promoções.
+4. As mensagens enviadas possuem botões interativos que levam direto ao link.
 
-/contato
+---
 
-/info
-
-/feedback
-
-🔘 Inline buttons that redirect directly to the promotion link
-
-🧠 How it works
-
-Promotion links are stored in MongoDB with their scheduled time.
-
-The bot dynamically queries the database.
-
-The Job Queue runs scheduled tasks at defined times.
-
-The correct link is automatically sent to the chat.
-
-🛠 Technologies Used
-
-Python
-
-python-telegram-bot
-
-MongoDB Atlas
-
-PyMongo
-
-ZoneInfo (timezone handling)
-
-JobQueue (task scheduling)
-
-⚙️ Database Structure (example)
-{
-  "hour": "10:00",
-  "url": "https://promotionlink.com",
-  "description": "Daily promotion"
-}
-
-🧩 Challenges Faced
-
-Connecting the bot properly to MongoDB Atlas
-
-Understanding the difference between:
-
-Command-triggered functions (CommandHandler)
-
-Scheduled functions (job_queue)
-
-Fixing parameter conflicts in scheduling
-
-Adjusting message delivery according to Brasília timezone
-
-✅ Result
-
-✔ Fully functional bot
-✔ 100% automated message sending
-✔ Scalable structure ready for:
-
-more schedules
-
-new promotions
-
-additional commands
-
-logging system
-
-📌 Possible Future Improvements
-
-Admin panel
-
-Configurable schedules via Telegram
-
-Delivery reports
-
-Click tracking
-
-💡 Project Goal
-
-Apply in practice concepts such as:
-
-Automation
-
-API integration
-
-Cloud databases
-
-Task scheduling
-
-Scalable bot architecture
+## ▶️ Execução
+1. Configure o arquivo `.env` com:
+   ```env
+   TOKEN=seu_token_do_bot
+   CHAT_ID=-123456789
